@@ -7,14 +7,14 @@ if len(sys.argv) != 2:
 url = sys.argv[1]
 
 try:
-    ydl_options = {'skip_download': True, 'quiet': True}
+    ydl_options: dict = {'skip_download': True, 'quiet': True}
     with yt_dlp.YoutubeDL(ydl_options) as ydl:
-        metadata = ydl.extract_info(url, download=False)
-        title = metadata.get('title')
+        metadata:dict = ydl.extract_info(url, download=False)
+        title: str = metadata.get('title')
         print(f"title: {title}")
 except yt_dlp.utils.DownloadError:
     sys.exit(1)
-answer = input("install video? y/n:  ")
+answer:str = input("install video? y/n:  ")
 if answer.lower() == "y":
     with yt_dlp.YoutubeDL() as ydl:
         ydl.download(url)
